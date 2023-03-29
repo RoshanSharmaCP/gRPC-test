@@ -1,0 +1,42 @@
+syntax ="proto3";
+
+package main;
+
+option go_package="./proto";
+
+import "grpc-test/google/api/annotations.proto";
+
+message Communication {
+    string id = 1;
+    string recipient = 2;
+    string sender = 3;
+    string type = 4;
+    string service = 5;
+    string user_id = 6;
+
+}
+message CommunicationRequest{
+    string id =1;
+}
+
+message CommunicationResponse{
+    repeated Communication communications = 1;
+}
+
+
+service ListCommunication{
+    rpc GetList(CommunicationRequest) returns (CommunicationResponse)
+    {
+        option (google.api.http) = {
+            get: "/list_communications"
+            body: "*"
+        };
+    }
+
+}
+
+
+
+
+
+
